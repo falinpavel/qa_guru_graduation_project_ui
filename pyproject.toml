@@ -8,6 +8,14 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.9,<4.0"
 
+[tool.pytest.ini_options]
+addopts = "-vv -s --showlocals --tb=long -rfEX --durations=10 --alluredir=allure-results"
+markers = [
+    "ui: Помечает тест как веб",
+    "regression: Помечает регрессионные тесты",
+    "smoke: Помечает smoke тесты"
+]
+
 [tool.poetry]
 package-mode = false
 
