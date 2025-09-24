@@ -206,5 +206,5 @@ def browser_settings(context) -> browser:
     if context.endswith("selenoid"):
         allure_attachments.add_video_from_selenoid(browser)
 
-    with step("Closing browser"):
+    with step("Закрытие браузера"):
         browser.quit()
