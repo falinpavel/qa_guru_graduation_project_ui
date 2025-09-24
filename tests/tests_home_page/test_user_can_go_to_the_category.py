@@ -26,11 +26,8 @@ class TestUserCanGoToTheCategory:
             "Headphones and Speakers", "Dyson Products", "Gaming", "Gadgets", "Accessories", "Services and Software"
         ]
     )
+    @pytest.mark.usefixtures("full_opening_home_page")
     def test_user_can_go_to_the_category_from_home_page(self, category_name):
         cm_store.home_page \
-            .open() \
-            .is_opened() \
-            .accept_cookie() \
-            .close_location_box() \
             .check_section_categories_is_displayed() \
             .click_category_by(category_name=category_name)

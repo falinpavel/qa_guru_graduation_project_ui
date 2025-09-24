@@ -20,6 +20,8 @@ class HomePage:
         self.section_sales = '.sales-container'
         self.view_all_stocks_button = '.promotions'
         self.close_location_button = '.header-city__question-button-close'
+        self.location_name_button = '.header-city__link'
+        self.modal_location_name_button = '//div[@class="city-search__content"]//a[contains(text(), "{location_name}")]'
 
     @step("Открываем главную страницу")
     def open(self) -> 'HomePage':
@@ -34,6 +36,16 @@ class HomePage:
     @step("Закрываем плашку локации нажимая на крестик")
     def close_location_box(self) -> 'HomePage':
         s(self.close_location_button).should(EC.by_and(be.clickable)).click()
+        return self
+
+    @step("Проверяем наименование локации (по умолчанию Москва)")
+    def check_location_name(self, location_name: str = "Москва") -> 'HomePage':
+        s(self.location_name_button).should(EC.by_and(be.visible, have.text(location_name)))
+        return self
+
+    @step("Открываем модальное окно и выбираем новую локацию из списка")
+    def change_location_from_present_list(self, location_name: str) -> 'HomePage':
+        s(self.modal_location_name_button.format(location_name=location_name)).should(EC.by_and(be.clickable)).click()
         return self
 
     @step("Закрываем виджет 'Напишите нам...'")
