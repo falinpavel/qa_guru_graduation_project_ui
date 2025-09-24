@@ -8,7 +8,7 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
 )
 class TestCookiesMayBeAccepted:
     @allure_mid_level_marks(
-        story="Политика обработки соглашения об обработке cookies",
+        story="Политика обработки соглашения cookies",
         testcase_id="1",
         title="Пользователь при первом посещении (session) может принять соглашение об обработке кук",
         label="UI",
