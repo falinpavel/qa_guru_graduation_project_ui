@@ -16,22 +16,22 @@ class HomePage:
         self.slider_swipe_left_button = '.home-hero__nav_prev'
         self.slider_swipe_right_button = '.home-hero__nav_next'
 
-    @step("Открыть главную страницу")
+    @step("Открываем главную страницу")
     def open(self):
         browser.open(self.base_url)
         return self
 
-    @step("Проверить открытие главной страницы")
+    @step("Проверяем что главная страница открылась")
     def is_opened(self):
         s(self.slider).should(EC.by_and(be.visible))
         return self
 
-    @step("Закрыть виджет 'Напишите нам...'")
+    @step("Закрываем виджет 'Напишите нам...'")
     def close_widget(self):
         s(self.close_widget_button).should(EC.by_and(be.clickable)).click()
         return self
 
-    @step("Принять куки")
+    @step("На плашке куки принимаем их")
     def accept_cookie(self):
         s(self.accept_cookie_button).should(EC.by_and(be.clickable)).click()
         return self

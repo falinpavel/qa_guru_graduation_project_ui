@@ -17,47 +17,47 @@ class HeaderTopMenu:
         self.phone_button = '.header-phone-menu'
         self.bg_phone_menu = '.header-phone-menu__bg'
 
-    @step("Нажать на кнопку локации")
+    @step("Наживаем на кнопку смены локации")
     def click_location_button(self):
         s(self.location_button).should(EC.by_and(be.clickable)).click()
         return self
 
-    @step("Нажать на кнопку 'Магазины'")
+    @step("Нажимаем на кнопку 'Магазины'")
     def click_shops_button(self):
         s(self.shops_button).should(EC.by_and(be.clickable, have.text("Магазины"))).click()
         return self
 
-    @step("Нажать на кнопку 'Trade-in'")
+    @step("Нажимаем на кнопку 'Trade-in'")
     def click_trade_in_button(self):
         s(self.trade_in_button).should(EC.by_and(be.clickable, have.text("Trade-in"))).click()
         return self
 
-    @step("Нажать на кнопку 'Оплата и доставка'")
+    @step("Нажимаем на кнопку 'Оплата и доставка'")
     def click_payment_and_delivery_button(self):
         s(self.payment_and_delivery_button).should(EC.by_and(be.clickable, have.text("Оплата и доставка"))).click()
         return self
 
-    @step("Нажать на кнопку 'Гарантия и возврат'")
+    @step("Нажимаем на кнопку 'Гарантия и возврат'")
     def click_guarantee_button(self):
         s(self.guarantee_button).should(EC.by_and(be.clickable, have.text("Гарантия и возврат"))).click()
         return self
 
-    @step("Нажать на кнопку 'Рассрочка и кредит'")
+    @step("Нажимаем на кнопку 'Рассрочка и кредит'")
     def click_credit_button(self):
         s(self.credit_button).should(EC.by_and(be.clickable, have.text("Рассрочка и кредит"))).click()
         return self
 
-    @step("Нажать на кнопку 'Новости и обзоры'")
+    @step("Нажимаем на кнопку 'Новости и обзоры'")
     def click_overview_button(self):
         s(self.overview_button).should(EC.by_and(be.clickable, have.text("Новости и обзоры"))).click()
         return self
 
-    @step("Нажать на кнопку 'Сервисный центр'")
+    @step("Нажимаем на кнопку 'Сервисный центр'")
     def click_service_button(self):
         s(self.service_cm_store_button).should(EC.by_and(be.clickable, have.text("Сервисный центр"))).click()
         return self
 
-    @step("Нажать на иконку телефона")
+    @step("Нажимаем на иконку телефона")
     def click_phone_button(self):
         s(self.phone_button).should(EC.by_and(be.clickable)).click()
         return self
