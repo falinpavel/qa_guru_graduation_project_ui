@@ -18,4 +18,5 @@ class TestCookiesMayBeAccepted:
         cm_store.home_page \
             .open() \
             .is_opened() \
-            .accept_cookie()
+            .accept_cookie() \
+            .check_cookie_is_disappeared()

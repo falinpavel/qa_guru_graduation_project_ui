@@ -31,7 +31,11 @@ class HomePage:
         s(self.close_widget_button).should(EC.by_and(be.clickable)).click()
         return self
 
-    @step("На плашке куки принимаем их")
+    @step("Принимаем cookies")
     def accept_cookie(self):
         s(self.accept_cookie_button).should(EC.by_and(be.clickable)).click()
         return self
+
+    @step("Проверяем что плашка cookies исчезла")
+    def check_cookie_is_disappeared(self):
+        s(self.accept_cookie_button).should(EC.by_and(be.not_.visible))
