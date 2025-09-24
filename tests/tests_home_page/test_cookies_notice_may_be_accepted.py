@@ -4,7 +4,7 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
 
 @allure_high_level_marks(
     epic="Главная страница",
-    feature="Необзодимо отображать плашку с политикой обработки куки"
+    feature="Необходимо отображать плашку с политикой обработки куки"
 )
 class TestCookiesMayBeAccepted:
     @allure_mid_level_marks(
