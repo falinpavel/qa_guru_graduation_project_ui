@@ -17,46 +17,46 @@ class HeaderBottomMenu:
         self.profile_button = 'div[cmstore_ajax_id="HeaderProfileContent"]'
 
     @step("Нажимаем на логотип для перехода на главную страницу")
-    def click_logo_button(self):
+    def click_logo_button(self) -> 'HeaderBottomMenu':
         s(self.logo_button).should(EC.by_and(be.clickable)).click()
         return self
 
     @step("Нажимаем на кнопку 'Каталог' и перейходим на страницу каталога")
-    def click_catalog_button(self):
+    def click_catalog_button(self) -> 'HeaderBottomMenu':
         s(self.catalog_button).should(EC.by_and(be.clickable, have.text("Каталог"))).click()
         return self
 
     @step("Нажимаем на кнопку 'Акции' и переходим на страницу акций")
-    def click_stocks_button(self):
+    def click_stocks_button(self) -> 'HeaderBottomMenu':
         s(self.stocks_button).should(EC.by_and(be.clickable, have.text("Акции"))).click()
         return self
 
     @step("Нажимаем на поле ввода поиска по каталогу и вводим свое значение")
-    def input_search_field(self, search_value):
+    def input_search_field(self, search_value) -> 'HeaderBottomMenu':
         s(self.input_search_field).should(EC.by_and(be.clickable)).click().type(search_value)
         return self
 
     @step("Нажимаем на кнопку поиска (лупа)")
-    def click_search_button(self):
+    def click_search_button(self) -> 'HeaderBottomMenu':
         s(self.search_button).should(EC.by_and(be.clickable)).click()
         return self
 
     @step("Нажимаем на кнопку 'Сравнение'")
-    def click_compare_button(self):
+    def click_compare_button(self) -> 'HeaderBottomMenu':
         s(self.compare_button).should(EC.by_and(be.clickable))
         return self
 
     @step("Нажимаем на кнопку 'Избранное'")
-    def click_favorites_button(self):
+    def click_favorites_button(self) -> 'HeaderBottomMenu':
         s(self.favorites_button).should(EC.by_and(be.clickable, have.text("Избранное"))).click()
         return self
 
     @step("Нажимаем на кнопку 'Корзина'")
-    def click_cart_button(self):
+    def click_cart_button(self) -> 'HeaderBottomMenu':
         s(self.cart_button).should(EC.by_and(be.clickable, have.text("Корзина"))).click()
         return self
 
     @step("Нажимаем на кнопку 'Профиль'")
-    def click_profile_button(self):
+    def click_profile_button(self) -> 'HeaderBottomMenu':
         s(self.profile_button).should(EC.by_and(be.clickable, have.text("Профиль"))).click()
         return self
