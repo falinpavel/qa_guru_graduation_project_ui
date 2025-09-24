@@ -1,8 +1,9 @@
-from pydantic import BaseModel, Field, field_validator
-from typing import Literal
+from pydantic import BaseModel, Field, field_validator, model_validator
+from typing import Literal, ClassVar
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+# Определяем допустимые значения для context
 ContextType = Literal[
     "chrome_local",
     "firefox_local",
@@ -12,6 +13,7 @@ ContextType = Literal[
 
 
 class BrowserConfig(BaseModel):
+    """Модель для валидации конфигурации браузера"""
     context: ContextType = Field(..., description="Тип контекста запуска")
     browser_name: str
     browser_version: str
@@ -20,71 +22,127 @@ class BrowserConfig(BaseModel):
     enable_log: bool = False
     window_size: str = "1920,1080"
 
+    @classmethod
     @field_validator('browser_name')
-    def validate_browser_name(cls, v, values):
-        context = values.get('context', '')
-        if context.startswith('chrome') and v != 'chrome':
-            raise ValueError(f'Для контекста {context} browser_name должен быть "chrome"')
-        if context.startswith('firefox') and v != 'firefox':
-            raise ValueError(f'Для контекста {context} browser_name должен быть "firefox"')
+    def validate_browser_name(cls, v: str) -> str:
+        """Валидирует имя браузера"""
+        if v not in ['chrome', 'firefox']:
+            raise ValueError('browser_name должен быть "chrome" или "firefox"')
         return v
 
+    @classmethod
     @field_validator('browser_version')
-    def validate_browser_version(cls, v):
-        if not v.replace('.', '').isdigit():
+    def validate_browser_version(cls, v: str) -> str:
+        """Валидирует формат версии браузера"""
+        if not v.replace(__old='.', __new='').isdigit():
             raise ValueError('Версия браузера должна содержать только цифры и точки')
         return v
 
+    @classmethod
+    @field_validator('window_size')
+    def validate_window_size(cls, v: str) -> str:
+        """Валидирует формат размера окна"""
+        parts = v.split(',')
+        if len(parts) != 2 or not all(part.isdigit() for part in parts):
+            raise ValueError('Размер окна должен быть в формате "width,height" (например, "1920,1080")')
+        return v
+
+
+class BrowserConfigAdvanced(BaseModel):
+    """Расширенная модель с межполевой валидацией"""
+    context: ContextType = Field(..., description="Тип контекста запуска")
+    browser_name: str
+    browser_version: str
+    enable_vnc: bool = False
+    enable_video: bool = False
+    enable_log: bool = False
+    window_size: str = "1920,1080"
+
+    @classmethod
+    @field_validator('browser_name')
+    def validate_browser_name(cls, v: str) -> str:
+        """Валидирует имя браузера"""
+        if v not in ['chrome', 'firefox']:
+            raise ValueError('browser_name должен быть "chrome" или "firefox"')
+        return v
+
+    @model_validator(mode='after')
+    def validate_context_consistency(self) -> 'BrowserConfigAdvanced':
+        """Валидирует согласованность context и browser_name"""
+        context = self.context
+        browser_name = self.browser_name
+
+        if context.startswith('chrome') and browser_name != 'chrome':
+            raise ValueError(f'Для контекста {context} browser_name должен быть "chrome"')
+
+        if context.startswith('firefox') and browser_name != 'firefox':
+            raise ValueError(f'Для контекста {context} browser_name должен быть "firefox"')
+
+        # Дополнительная логика для selenoid
+        if context.endswith('selenoid'):
+            if not self.enable_vnc:
+                raise ValueError('Для Selenoid контекста enable_vnc должен быть True')
+
+        return self
+
 
 class ConfigValidator:
+    """Класс для валидации конфигурации"""
 
-    @staticmethod
-    def get_validated_config(context: str) -> BrowserConfig:
-        configs = {
-            "chrome_local": BrowserConfig(
-                context="chrome_local",
-                browser_name="chrome",
-                browser_version="128.0",
-                enable_vnc=False,
-                enable_video=False,
-                enable_log=False
-            ),
-            "firefox_local": BrowserConfig(
-                context="firefox_local",
-                browser_name="firefox",
-                browser_version="125.0",
-                enable_vnc=False,
-                enable_video=False,
-                enable_log=False
-            ),
-            "chrome_selenoid": BrowserConfig(
-                context="chrome_selenoid",
-                browser_name="chrome",
-                browser_version="128.0",
-                enable_vnc=True,
-                enable_video=True,
-                enable_log=True
-            ),
-            "firefox_selenoid": BrowserConfig(
-                context="firefox_selenoid",
-                browser_name="firefox",
-                browser_version="125.0",
-                enable_vnc=True,
-                enable_video=True,
-                enable_log=True
-            )
+    # Базовые настройки для каждого типа контекста
+    CONFIG_MAP: ClassVar[dict] = {
+        "chrome_local": {
+            "context": "chrome_local",
+            "browser_name": "chrome",
+            "browser_version": "128.0",
+            "enable_vnc": False,
+            "enable_video": False,
+            "enable_log": False
+        },
+        "firefox_local": {
+            "context": "firefox_local",
+            "browser_name": "firefox",
+            "browser_version": "125.0",
+            "enable_vnc": False,
+            "enable_video": False,
+            "enable_log": False
+        },
+        "chrome_selenoid": {
+            "context": "chrome_selenoid",
+            "browser_name": "chrome",
+            "browser_version": "128.0",
+            "enable_vnc": True,
+            "enable_video": True,
+            "enable_log": True
+        },
+        "firefox_selenoid": {
+            "context": "firefox_selenoid",
+            "browser_name": "firefox",
+            "browser_version": "125.0",
+            "enable_vnc": True,
+            "enable_video": True,
+            "enable_log": True
         }
+    }
 
-        if context not in configs:
+    @classmethod
+    def get_validated_config(cls, context: str) -> BrowserConfig:
+        """Валидирует context и возвращает конфигурацию"""
+
+        if context not in cls.CONFIG_MAP:
             raise ValueError(
                 f"Неверное значение context: '{context}'. "
-                f"Допустимые значения: {list(configs.keys())}"
+                f"Допустимые значения: {list(cls.CONFIG_MAP.keys())}"
             )
 
-        return configs[context]
+        config_data = cls.CONFIG_MAP[context]
+        return BrowserConfig(**config_data)
 
 
 def options_management(context: str):
+    """Создает опции браузера с валидацией параметров"""
+
+    # Валидируем конфигурацию
     config = ConfigValidator.get_validated_config(context)
 
     if config.context.startswith("chrome"):
@@ -112,14 +170,15 @@ def options_management(context: str):
 
     elif config.context.startswith("firefox"):
         options = FirefoxOptions()
-        options.page_load_strategy = 'eager'
-        options.add_argument(f"--width={config.window_size.split(',')[0]}")
-        options.add_argument(f"--height={config.window_size.split(',')[1]}")
+        width, height = config.window_size.split(',')
+        options.add_argument(f"--width={width}")
+        options.add_argument(f"--height={height}")
         options.add_argument("--disable-web-security")
         options.add_argument("--allow-running-insecure-content")
         options.add_argument("--purgecaches")
         options.add_argument("--disable-gpu")
 
+        # Настройки для Firefox
         options.set_preference(name="browser.download.folderList", value=2)
         options.set_preference(name="browser.download.manager.showWhenStarting", value=False)
         options.set_preference(name="browser.helperApps.neverAsk.saveToDisk", value="application/octet-stream")
