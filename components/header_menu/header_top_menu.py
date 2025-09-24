@@ -1,56 +1,63 @@
-from selene import browser, be, have
+from selene import be, have
 from selene.core.conditions import Condition as EC
-from selene.support.shared.jquery_style import s, ss
+from selene.support.shared.jquery_style import s
 from allure import step
 
 
 class HeaderTopMenu:
     def __init__(self):
-        self.close_promo_button = ".TopLine_promo-topline__close__NxqbX"
-        self.logo_home_page = ".HeaderTop_header-top-logo__zO0BT"
-        self.location_button = ".HeaderTop_header-country__DY_Tl"
-        self.stores_button = ".HeaderTop_header-top_left-stores__Kx_de"
-        self.payment_delivery_button = ".HeaderTop_header-top_left-delivery-link__FoJTX"
-        self.favorites_button = "button[data-qa='header_favorites_btn']"
-        self.basket_button = "button[data-qa='header_to_basket_btn']"
-        self.user_login_button = "button[data-qa='header_user_login_btn']"
+        self.location_button = '.header-city__link'
+        self.shops_button = '.header__hhead-left > .header__url_mod1'
+        self.trade_in_button = '.header__hhead-right > a[href="/trade-in/"]'
+        self.payment_and_delivery_button = '.header__hhead-right > a[href="/delivery/"]'
+        self.guarantee_button = '.header__hhead-right > a[href="/guarantee/"]'
+        self.credit_button = '.header__hhead-right > a[href="/credit/"]'
+        self.overview_button = '.header__hhead-right > a[href="/overviews/"]'
+        self.service_cm_store_button = '.header__hhead-right > a[href="https://service.cmstore.ru/"]'
+        self.phone_button = '.header-phone-menu'
+        self.bg_phone_menu = '.header-phone-menu__bg'
 
-    @step("Закрыть в хедере плашку с промо")
-    def close_promo_top_line(self):
-        s(self.close_promo_button).should(EC.by_and(be.clickable)).click()
-        return self
-
-    @step("Кликнуть на логотип для возврата на главную страницу")
-    def click_logo_for_return_to_home_page(self):
-        s(self.logo_home_page).should(EC.by_and(be.clickable)).click()
-        return self
-
-    @step("Кликнуть на кнопку выбора локации")
+    @step("Нажать на кнопку локации")
     def click_location_button(self):
         s(self.location_button).should(EC.by_and(be.clickable)).click()
         return self
 
-    @step("Кликнуть на кнопку 'Магазины'")
-    def click_stores_button(self):
-        s(self.stores_button).should(EC.by_and(be.clickable)).click()
+    @step("Нажать на кнопку 'Магазины'")
+    def click_shops_button(self):
+        s(self.shops_button).should(EC.by_and(be.clickable, have.text("Магазины"))).click()
         return self
 
-    @step("Кликнуть на кнопку 'Доставка и оплата'")
+    @step("Нажать на кнопку 'Trade-in'")
+    def click_trade_in_button(self):
+        s(self.trade_in_button).should(EC.by_and(be.clickable, have.text("Trade-in"))).click()
+        return self
+
+    @step("Нажать на кнопку 'Оплата и доставка'")
     def click_payment_and_delivery_button(self):
-        s(self.payment_delivery_button).should(EC.by_and(be.clickable)).click()
+        s(self.payment_and_delivery_button).should(EC.by_and(be.clickable, have.text("Оплата и доставка"))).click()
         return self
 
-    @step("Кликнуть на кнопку 'Избранное'")
-    def click_favorites_button(self):
-        s(self.favorites_button).should(EC.by_and(be.clickable)).click()
+    @step("Нажать на кнопку 'Гарантия и возврат'")
+    def click_guarantee_button(self):
+        s(self.guarantee_button).should(EC.by_and(be.clickable, have.text("Гарантия и возврат"))).click()
         return self
 
-    @step("Кликнуть на кнопку 'Корзина'")
-    def click_basket_button(self):
-        s(self.basket_button).should(EC.by_and(be.clickable)).click()
+    @step("Нажать на кнопку 'Рассрочка и кредит'")
+    def click_credit_button(self):
+        s(self.credit_button).should(EC.by_and(be.clickable, have.text("Рассрочка и кредит"))).click()
         return self
 
-    @step("Кликнуть на кнопку 'Войти'")
-    def click_user_login_button(self):
-        s(self.user_login_button).should(EC.by_and(be.clickable)).click()
+    @step("Нажать на кнопку 'Новости и обзоры'")
+    def click_overview_button(self):
+        s(self.overview_button).should(EC.by_and(be.clickable, have.text("Новости и обзоры"))).click()
+        return self
+
+    @step("Нажать на кнопку 'Сервисный центр'")
+    def click_service_button(self):
+        s(self.service_cm_store_button).should(EC.by_and(be.clickable, have.text("Сервисный центр"))).click()
+        return self
+
+    @step("Нажать на иконку телефона")
+    def click_phone_button(self):
+        s(self.phone_button).should(EC.by_and(be.clickable)).click()
         return self
