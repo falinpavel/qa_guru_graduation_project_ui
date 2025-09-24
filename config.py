@@ -1,3 +1,17 @@
+"""
+Модуль конфигурации для управления настройками браузера в тестах.
+
+Этот модуль предоставляет функциональность для валидации и управления конфигурацией
+браузера с использованием Pydantic V2. Включает в себя модели данных для валидации
+параметров, классы-валидаторы и фабрики для создания опций браузера.
+
+Основные компоненты:
+- BrowserConfig: Модель Pydantic для валидации базовой конфигурации браузера
+- BrowserConfigAdvanced: Расширенная модель с межполевой валидацией
+- ConfigValidator: Класс для централизованной валидации конфигурации
+- options_management: Функция для создания настроек браузера на основе конфигурации
+"""
+
 from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Literal, ClassVar
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -13,19 +27,70 @@ ContextType = Literal[
 
 
 class BrowserConfig(BaseModel):
-    """Модель для валидации конфигурации браузера"""
-    context: ContextType = Field(..., description="Тип контекста запуска")
-    browser_name: str
-    browser_version: str
-    enable_vnc: bool = False
-    enable_video: bool = False
-    enable_log: bool = False
-    window_size: str = "1920,1080"
+    """
+    Модель Pydantic для валидации базовой конфигурации браузера.
+
+    Эта модель обеспечивает типобезопасность и валидацию параметров конфигурации
+    браузера перед их использованием в тестах. Каждое поле проходит валидацию
+    на соответствие ожидаемому формату и значениям.
+
+    Атрибуты:
+        context (ContextType): Тип контекста запуска браузера. Определяет где
+            и как будет запущен браузер (локально или в Selenoid).
+        browser_name (str): Название браузера ('chrome' или 'firefox').
+        browser_version (str): Версия браузера в формате 'X.Y.Z'.
+        enable_vnc (bool): Флаг включения VNC для удаленного просмотра сессии.
+        enable_video (bool): Флаг записи видео сессии.
+        enable_log (bool): Флаг логирования действий браузера.
+        window_size (str): Размер окна браузера в формате 'width,height'.
+    """
+    context: ContextType = Field(
+        default=...,
+        description="Тип контекста запуска браузера. Определяет окружение и способ запуска."
+    )
+    browser_name: str = Field(
+        default=...,
+        description="Название браузера: 'chrome' для Google Chrome, 'firefox' для Mozilla Firefox"
+    )
+    browser_version: str = Field(
+        default=...,
+        description="Версия браузера в семантическом формате версионирования (например, '128.0.0.0')"
+    )
+    enable_vnc: bool = Field(
+        default=False,
+        description="Включение VNC для удаленного просмотра и управления сессией в реальном времени"
+    )
+    enable_video: bool = Field(
+        default=False,
+        description="Включение записи видео сессии для последующего анализа и отладки"
+    )
+    enable_log: bool = Field(
+        default=False,
+        description="Включение детального логирования действий и событий браузера"
+    )
+    window_size: str = Field(
+        default="1920,1080",
+        description="Размер окна браузера в пикселях в формате 'ширина,высота'"
+    )
 
     @classmethod
     @field_validator('browser_name')
     def validate_browser_name(cls, v: str) -> str:
-        """Валидирует имя браузера"""
+        """
+        Валидирует корректность имени браузера.
+
+        Проверяет, что указанное имя браузера соответствует поддерживаемым значениям.
+        Поддерживаются только 'chrome' и 'firefox' как основные браузеры для тестирования.
+
+        Args:
+            v (str): Проверяемое значение имени браузера.
+
+        Returns:
+            str: Валидированное имя браузера, если проверка пройдена.
+
+        Raises:
+            ValueError: Если имя браузера не 'chrome' или 'firefox'.
+        """
         if v not in ['chrome', 'firefox']:
             raise ValueError('browser_name должен быть "chrome" или "firefox"')
         return v
@@ -33,7 +98,21 @@ class BrowserConfig(BaseModel):
     @classmethod
     @field_validator('browser_version')
     def validate_browser_version(cls, v: str) -> str:
-        """Валидирует формат версии браузера"""
+        """
+        Валидирует формат версии браузера.
+
+        Проверяет, что версия браузера состоит только из цифр и точек,
+        что соответствует стандартному формату семантического версионирования.
+
+        Args:
+            v (str): Проверяемое значение версии браузера.
+
+        Returns:
+            str: Валидированная версия браузера, если проверка пройдена.
+
+        Raises:
+            ValueError: Если версия содержит недопустимые символы.
+        """
         if not v.replace(__old='.', __new='').isdigit():
             raise ValueError('Версия браузера должна содержать только цифры и точки')
         return v
@@ -41,7 +120,21 @@ class BrowserConfig(BaseModel):
     @classmethod
     @field_validator('window_size')
     def validate_window_size(cls, v: str) -> str:
-        """Валидирует формат размера окна"""
+        """
+        Валидирует формат размера окна браузера.
+
+        Проверяет, что строка размера окна имеет правильный формат 'width,height'
+        и оба значения являются положительными целыми числами.
+
+        Args:
+            v (str): Проверяемое значение размера окна.
+
+        Returns:
+            str: Валидированный размер окна, если проверка пройдена.
+
+        Raises:
+            ValueError: Если формат не соответствует 'width,height' или значения не цифровые.
+        """
         parts = v.split(',')
         if len(parts) != 2 or not all(part.isdigit() for part in parts):
             raise ValueError('Размер окна должен быть в формате "width,height" (например, "1920,1080")')
@@ -49,7 +142,16 @@ class BrowserConfig(BaseModel):
 
 
 class BrowserConfigAdvanced(BaseModel):
-    """Расширенная модель с межполевой валидацией"""
+    """
+    Расширенная модель конфигурации браузера с межполевой валидацией.
+
+    Наследует все возможности BrowserConfig и добавляет дополнительную валидацию
+    согласованности между различными полями конфигурации. Особенно полезно для
+    проверки логических связей между context и другими параметрами.
+
+    Атрибуты:
+        Унаследованы от BrowserConfig
+    """
     context: ContextType = Field(..., description="Тип контекста запуска")
     browser_name: str
     browser_version: str
@@ -61,14 +163,42 @@ class BrowserConfigAdvanced(BaseModel):
     @classmethod
     @field_validator('browser_name')
     def validate_browser_name(cls, v: str) -> str:
-        """Валидирует имя браузера"""
+        """
+        Валидирует имя браузера на соответствие поддерживаемым значениям.
+
+        Обеспечивает, что в конфигурации указан только один из поддерживаемых
+        браузеров, что предотвращает ошибки на этапе запуска тестов.
+
+        Args:
+            v (str): Проверяемое значение имени браузера.
+
+        Returns:
+            str: Валидированное имя браузера.
+
+        Raises:
+            ValueError: При указании неподдерживаемого браузера.
+        """
         if v not in ['chrome', 'firefox']:
             raise ValueError('browser_name должен быть "chrome" или "firefox"')
         return v
 
     @model_validator(mode='after')
     def validate_context_consistency(self) -> 'BrowserConfigAdvanced':
-        """Валидирует согласованность context и browser_name"""
+        """
+        Выполняет комплексную валидацию согласованности полей конфигурации.
+
+        Проверяет логические связи между различными параметрами:
+        - Соответствие browser_name и context (chrome context → chrome browser)
+        - Обязательность enable_vnc для selenoid контекстов
+        - Другие бизнес-правила конфигурации
+
+        Returns:
+            BrowserConfigAdvanced: Текущий экземпляр конфигурации после валидации.
+
+        Raises:
+            ValueError: При обнаружении логических несоответствий в конфигурации.
+            ValueError: Для контекста chrome_selenoid browser_name должен быть "chrome"
+        """
         context = self.context
         browser_name = self.browser_name
 
@@ -87,7 +217,17 @@ class BrowserConfigAdvanced(BaseModel):
 
 
 class ConfigValidator:
-    """Класс для валидации конфигурации"""
+    """
+    Фабрика и валидатор конфигураций браузера.
+
+    Предоставляет централизованный способ получения предварительно настроенных
+    и валидированных конфигураций для различных контекстов запуска тестов.
+    Исключает необходимость ручного создания конфигураций и предотвращает ошибки.
+
+    Атрибуты:
+        CONFIG_MAP (ClassVar[dict]): Словарь предустановленных конфигураций
+            для каждого поддерживаемого контекста.
+    """
 
     # Базовые настройки для каждого типа контекста
     CONFIG_MAP: ClassVar[dict] = {
@@ -127,7 +267,25 @@ class ConfigValidator:
 
     @classmethod
     def get_validated_config(cls, context: str) -> BrowserConfig:
-        """Валидирует context и возвращает конфигурацию"""
+        """
+        Возвращает валидированную конфигурацию для указанного контекста.
+
+        Основной метод класса, который выполняет:
+        1. Проверку существования запрошенного контекста
+        2. Получение предустановленной конфигурации
+        3. Валидацию конфигурации через Pydantic
+        4. Возврат готового к использованию объекта конфигурации
+
+        Args:
+            context (str): Идентификатор контекста запуска. Должен быть одним из
+                ключей CONFIG_MAP.
+
+        Returns:
+            BrowserConfig: Валидированный объект конфигурации браузера.
+
+        Raises:
+            ValueError: Если указан неизвестный или неподдерживаемый контекст.
+        """
 
         if context not in cls.CONFIG_MAP:
             raise ValueError(
@@ -139,8 +297,29 @@ class ConfigValidator:
         return BrowserConfig(**config_data)
 
 
-def options_management(context: str):
-    """Создает опции браузера с валидацией параметров"""
+def options_management(context: str) -> ChromeOptions | FirefoxOptions:
+    """
+    Фабрика для создания настроек браузера на основе контекста.
+
+    Основная функция модуля, которая преобразует валидированную конфигурацию
+    в конкретные объекты опций браузера, готовые к использованию с Selenium WebDriver.
+
+    Функция выполняет:
+    1. Валидацию входного контекста через ConfigValidator
+    2. Создание соответствующего объекта опций (ChromeOptions или FirefoxOptions)
+    3. Настройку параметров браузера в соответствии с конфигурацией
+    4. Добавление capabilities для Selenoid при необходимости
+
+    Args:
+        context (str): Контекст запуска браузера. Определяет тип создаваемых опций.
+
+    Returns:
+        ChromeOptions | FirefoxOptions: Объект настроек браузера, настроенный
+            в соответствии с указанным контекстом.
+
+    Raises:
+        ValueError: Если возникает ошибка при валидации контекста или создании опций.
+    """
 
     # Валидируем конфигурацию
     config = ConfigValidator.get_validated_config(context)
@@ -178,7 +357,6 @@ def options_management(context: str):
         options.add_argument("--purgecaches")
         options.add_argument("--disable-gpu")
 
-        # Настройки для Firefox
         options.set_preference(name="browser.download.folderList", value=2)
         options.set_preference(name="browser.download.manager.showWhenStarting", value=False)
         options.set_preference(name="browser.helperApps.neverAsk.saveToDisk", value="application/octet-stream")
