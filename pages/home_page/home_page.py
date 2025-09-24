@@ -1,9 +1,9 @@
-from selene import browser, be, have
+from selene import browser, be
 from selene.core.conditions import Condition as EC
-from selene.support.shared.jquery_style import s, ss
+from selene.support.shared.jquery_style import s
 from allure import step
 
-from helpers.data_source.links.links import Links
+from helpers.links.links import Links
 
 
 class HomePage:
