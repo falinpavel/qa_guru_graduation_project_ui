@@ -6,16 +6,16 @@ from allure import step
 
 class HeaderTopMenu:
     def __init__(self):
-        self.location_button = '.header-city__link'
-        self.shops_button = '.header__hhead-left > .header__url_mod1'
-        self.trade_in_button = '.header__hhead-right > a[href="/trade-in/"]'
-        self.payment_and_delivery_button = '.header__hhead-right > a[href="/delivery/"]'
-        self.guarantee_button = '.header__hhead-right > a[href="/guarantee/"]'
-        self.credit_button = '.header__hhead-right > a[href="/credit/"]'
-        self.overview_button = '.header__hhead-right > a[href="/overviews/"]'
-        self.service_cm_store_button = '.header__hhead-right > a[href="https://service.cmstore.ru/"]'
-        self.phone_button = '.header-phone-menu'
-        self.bg_phone_menu = '.header-phone-menu__bg'
+        self.location_button: str = '.header-city__link'
+        self.shops_button: str = '.header__hhead-left > .header__url_mod1'
+        self.trade_in_button: str = '.header__hhead-right > a[href="/trade-in/"]'
+        self.payment_and_delivery_button: str = '.header__hhead-right > a[href="/delivery/"]'
+        self.guarantee_button: str = '.header__hhead-right > a[href="/guarantee/"]'
+        self.credit_button: str = '.header__hhead-right > a[href="/credit/"]'
+        self.overview_button: str = '.header__hhead-right > a[href="/overviews/"]'
+        self.service_cm_store_button: str = '.header__hhead-right > a[href="https://service.cmstore.ru/"]'
+        self.phone_button: str = '.header-phone-menu'
+        self.bg_phone_menu: str = '.header-phone-menu__bg'
 
     @step("Наживаем на кнопку смены локации")
     def click_location_button(self) -> 'HeaderTopMenu':

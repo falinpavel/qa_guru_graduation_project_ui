@@ -8,20 +8,21 @@ from helpers.links.links import Links
 
 class HomePage:
     def __init__(self):
-        self.home_page_url = Links().base_page_url
+        self.home_page_url: str = Links().base_page_url
         # locators
-        self.close_widget_button = '.closeIcon__TO5Xx'
-        self.accept_cookie_button = '.cookie-notice__content > .button'
-        self.slider = '.home-hero__slider'
-        self.slider_swipe_left_button = '.home-hero__nav_prev'
-        self.slider_swipe_right_button = '.home-hero__nav_next'
-        self.section_categories = '.category-section__inner'
-        self.category_button_by_name = '//div[@class="category-section__inner"]//span[text()="{category_name}"]'
-        self.section_sales = '.sales-container'
-        self.view_all_stocks_button = '.promotions'
-        self.close_location_button = '.header-city__question-button-close'
-        self.location_name_button = '.header-city__link'
-        self.modal_location_name_button = '//div[@class="city-search__content"]//a[contains(text(), "{location_name}")]'
+        self.close_widget_button: str = '.closeIcon__TO5Xx'
+        self.accept_cookie_button: str = '.cookie-notice__content > .button'
+        self.slider: str = '.home-hero__slider'
+        self.slider_swipe_left_button: str = '.home-hero__nav_prev'
+        self.slider_swipe_right_button: str = '.home-hero__nav_next'
+        self.section_categories: str = '.category-section__inner'
+        self.category_button_by_name: str = '//div[@class="category-section__inner"]//span[text()="{category_name}"]'
+        self.section_sales: str = '.sales-container'
+        self.view_all_stocks_button: str = '.promotions'
+        self.close_location_button: str = '.header-city__question-button-close'
+        self.location_name_button: str = '.header-city__link'
+        self.modal_location_name_button: str \
+            = '//div[@class="city-search__content"]//a[contains(text(), "{location_name}")]'
 
     @step("Открываем главную страницу")
     def open(self) -> 'HomePage':

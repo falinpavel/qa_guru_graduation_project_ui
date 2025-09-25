@@ -6,15 +6,15 @@ from allure import step
 
 class HeaderBottomMenu:
     def __init__(self):
-        self.logo_button = '.header__logo'
-        self.catalog_button = '.header__bhead-left > a[href="/catalog/"]'
-        self.stocks_button = '.header__bhead-left > a[href="/stocks/"]'
-        self.input_search_field = '.header__search-input'
-        self.search_button = '.header__search-button'
-        self.compare_button = '.header__controll_compare'
-        self.favorites_button = '.header__controll_favorites'
-        self.cart_button = '.header__controll_basket'
-        self.profile_button = 'div[cmstore_ajax_id="HeaderProfileContent"]'
+        self.logo_button: str = '.header__logo'
+        self.catalog_button: str = '.header__bhead-left > a[href="/catalog/"]'
+        self.stocks_button: str = '.header__bhead-left > a[href="/stocks/"]'
+        self.input_search_field: str = '.header__search-input'
+        self.search_button: str = '.header__search-button'
+        self.compare_button: str = '.header__controll_compare'
+        self.favorites_button: str = '.header__controll_favorites'
+        self.cart_button: str = '.header__controll_basket'
+        self.profile_button: str = 'div[cmstore_ajax_id="HeaderProfileContent"]'
 
     @step("Нажимаем на логотип для перехода на главную страницу")
     def click_logo_button(self) -> 'HeaderBottomMenu':
@@ -32,7 +32,7 @@ class HeaderBottomMenu:
         return self
 
     @step("Нажимаем на поле ввода поиска по каталогу и вводим свое значение")
-    def input_search_field(self, search_value) -> 'HeaderBottomMenu':
+    def input_search_field(self, search_value: str) -> 'HeaderBottomMenu':
         s(self.input_search_field).should(EC.by_and(be.clickable)).click().type(search_value)
         return self
 

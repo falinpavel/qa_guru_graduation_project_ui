@@ -6,9 +6,9 @@ from allure import step
 
 class AuthModal:
     def __init__(self):
-        self.auth_modal_sign_in_title = '.modal__sign-in-title'
-        self.field_phone_number = '.input-text_type-3'
-        self.sign_in_button = '.modal__sign-in-btn'
+        self.auth_modal_sign_in_title: str = '.modal__sign-in-title'
+        self.field_phone_number: str = '.input-text_type-3'
+        self.sign_in_button: str = '.modal__sign-in-btn'
 
     @step("Проверяем что модальное окно авторизации отображается")
     def is_opened(self) -> 'AuthModal':

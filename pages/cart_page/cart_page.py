@@ -8,10 +8,10 @@ from helpers.links.links import Links
 
 class CartPage:
     def __init__(self):
-        self.cart_page_url = Links().cart_page_url
+        self.cart_page_url: str = Links().cart_page_url
         # locators
-        self.return_to_home_page_button = 'a[class="header-small__back"] span'
-        self.cart_is_empty_message_text = '.basket-empty__title'
+        self.return_to_home_page_button: str = 'a[class="header-small__back"] span'
+        self.cart_is_empty_message_text: str = '.basket-empty__title'
 
     @step("Открываем страницу корзины")
     def open(self) -> 'CartPage':
