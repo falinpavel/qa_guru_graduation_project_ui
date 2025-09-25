@@ -47,3 +47,21 @@ class CatalogMenu:
         s(self.headphones_group_button).should(EC.by_and(
             be.clickable, have.text("Наушники и колонки"))).hover()
         return self
+
+    @step("Наводим курсор на раздел 'Продукция Dyson'")
+    def hover_dyson_products_group_button(self) -> 'CatalogMenu':
+        s(self.dyson_products_group_button).should(EC.by_and(
+            be.clickable, have.text("Продукция Dyson"))).hover()
+        return self
+
+    @step("Наводим курсор на раздел 'Гейминг'")
+    def hover_gaming_group_button(self) -> 'CatalogMenu':
+        s(self.gaming_group_button).should(EC.by_and(
+            be.clickable, have.text("Гейминг"))).hover()
+        return self
+
+    @step("Наводим курсор на раздел 'Гаджеты'")
+    def hover_gadgets_group_button(self) -> 'CatalogMenu':
+        s(self.gadgets_group_button).should(EC.by_and(
+            be.clickable, have.text("Гаджеты"))).hover()
+        return self
