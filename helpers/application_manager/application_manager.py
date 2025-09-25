@@ -1,3 +1,4 @@
+from components.catalog_menu.catalog_menu import CatalogMenu
 from components.header_menu.header_bottom_menu import HeaderBottomMenu
 from components.header_menu.header_top_menu import HeaderTopMenu
 from pages.cart_page.cart_page import CartPage
@@ -10,6 +11,7 @@ class CmStoreApplicationManager:
         self.header_bottom_menu = HeaderBottomMenu()
         self.home_page = HomePage()
         self.cart_page = CartPage()
+        self.catalog_menu = CatalogMenu()
 
 
 cm_store = CmStoreApplicationManager()
