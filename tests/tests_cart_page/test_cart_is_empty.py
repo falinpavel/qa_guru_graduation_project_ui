@@ -11,7 +11,7 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
 class TestCartIsEmpty:
     @allure_mid_level_marks(
         story="Корзина пользователя по умолчанию пуста",
-        testcase_id="1",
+        testcase_id="5",
         title="Проверяем что корзина пуста",
         label="UI",
         owner="Falin Pavel (AQA)"
