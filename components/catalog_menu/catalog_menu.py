@@ -23,4 +23,27 @@ class CatalogMenu:
     @step("Наводим курсор на раздел 'Смартфоны'")
     def hover_smartphones_group_button(self) -> 'CatalogMenu':
         s(self.smartphones_group_button).should(EC.by_and(be.clickable, have.text("Смартфоны"))).hover()
+        return self
 
+    @step("Наводим курсор на раздел 'Планшеты'")
+    def hover_tablets_group_button(self) -> 'CatalogMenu':
+        s(self.tablets_group_button).should(EC.by_and(be.clickable, have.text("Планшеты"))).hover()
+        return self
+
+    @step("Наводим курсор на раздел 'Ноутбуки и компьютеры'")
+    def hover_laptops_and_computers_group_button(self) -> 'CatalogMenu':
+        s(self.laptops_and_computers_group_button).should(EC.by_and(
+            be.clickable, have.text("Ноутбуки и компьютеры"))).hover()
+        return self
+
+    @step("Наводим курсор на раздел 'Умные часы и фитнес-браслеты'")
+    def hover_smart_watch_and_fitness_group_button(self) -> 'CatalogMenu':
+        s(self.smart_watch_and_fitness_group_button).should(EC.by_and(
+            be.clickable, have.text("Умные часы и фитнес-браслеты"))).hover()
+        return self
+
+    @step("Наводим курсор на раздел 'Наушники и колонки'")
+    def hover_headphones_group_button(self) -> 'CatalogMenu':
+        s(self.headphones_group_button).should(EC.by_and(
+            be.clickable, have.text("Наушники и колонки"))).hover()
+        return self
