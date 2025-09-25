@@ -8,7 +8,7 @@ from helpers.links.links import Links
 
 class HomePage:
     def __init__(self):
-        self.base_url = Links().base_url
+        self.home_page_url = Links().base_page_url
         # locators
         self.close_widget_button = '.closeIcon__TO5Xx'
         self.accept_cookie_button = '.cookie-notice__content > .button'
@@ -25,7 +25,7 @@ class HomePage:
 
     @step("Открываем главную страницу")
     def open(self) -> 'HomePage':
-        browser.open(self.base_url)
+        browser.open(self.home_page_url)
         return self
 
     @step("Проверяем что главная страница открылась")
