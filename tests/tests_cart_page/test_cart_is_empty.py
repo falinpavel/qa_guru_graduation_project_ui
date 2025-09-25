@@ -1,3 +1,5 @@
+import pytest
+
 from helpers.application_manager.application_manager import cm_store
 from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mid_level_marks
 
@@ -14,5 +16,9 @@ class TestCartIsEmpty:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_cart_is_empty(self):
-        cm_store.cart_page.open().check_cart_is_empty()
+    @pytest.mark.usefixtures("full_opening_cart_page")
+    def test_cart_is_empty_by_default(self):
+        cm_store.header_bottom_menu.click_cart_button()
+        cm_store.cart_page \
+            .is_opened() \
+            .check_cart_is_empty()
