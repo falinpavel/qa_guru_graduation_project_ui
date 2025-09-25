@@ -17,6 +17,7 @@ class TestCatalogMenuOnHomePage:
         owner="Falin Pavel (AQA)",
     )
     @pytest.mark.usefixtures("full_opening_home_page")
+    @pytest.mark.smoke
     def test_catalog_menu_on_home_page_is_present(self):
         cm_store.header_bottom_menu.click_catalog_button()
         cm_store.catalog_menu \
