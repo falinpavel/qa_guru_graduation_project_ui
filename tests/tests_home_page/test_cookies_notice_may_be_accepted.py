@@ -1,3 +1,5 @@
+import pytest
+
 from helpers.application_manager.application_manager import cm_store
 from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mid_level_marks
 
@@ -14,6 +16,8 @@ class TestCookiesMayBeAccepted:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_user_may_accept_cookies_politics(self):
         cm_store.home_page \
             .open() \

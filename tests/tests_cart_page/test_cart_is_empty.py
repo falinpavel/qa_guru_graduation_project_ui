@@ -17,6 +17,9 @@ class TestCartIsEmpty:
         owner="Falin Pavel (AQA)"
     )
     @pytest.mark.usefixtures("full_opening_home_page")
+    @pytest.mark.smoke
+    @pytest.mark.regression
+    @pytest.mark.ui
     def test_cart_is_empty_by_default(self):
         cm_store.header_bottom_menu.click_cart_button()
         cm_store.cart_page \

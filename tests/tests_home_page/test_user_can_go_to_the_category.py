@@ -27,6 +27,8 @@ class TestUserCanGoToTheCategory:
         ]
     )
     @pytest.mark.usefixtures("full_opening_home_page")
+    @pytest.mark.regression
+    @pytest.mark.ui
     def test_user_can_go_to_the_category_from_home_page(self, category_name):
         cm_store.home_page \
             .check_section_categories_is_displayed() \

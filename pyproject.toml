@@ -13,7 +13,8 @@ addopts = "-vv -s --showlocals --tb=long -rfEX --durations=10 --alluredir=allure
 markers = [
     "ui: Помечает тест как веб",
     "regression: Помечает регрессионные тесты",
-    "smoke: Помечает smoke тесты"
+    "smoke: Помечает smoke тесты",
+    "end_to_end: Помечает end to end тесты"
 ]
 
 [tool.poetry]

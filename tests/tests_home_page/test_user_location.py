@@ -17,6 +17,8 @@ class TestUserLocation:
         owner="Falin Pavel (AQA)"
     )
     @pytest.mark.usefixtures("full_opening_home_page")
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_default_user_location_is_moscow(self):
         cm_store.home_page \
             .check_location_name()
@@ -37,6 +39,8 @@ class TestUserLocation:
         ]
     )
     @pytest.mark.usefixtures("full_opening_home_page")
+    @pytest.mark.regression
+    @pytest.mark.ui
     def test_user_can_change_new_location_from_present_list(self, new_location):
         cm_store.home_page.check_location_name()
         cm_store.header_top_menu.click_location_button()
