@@ -20,7 +20,7 @@ class TestCatalogMenuOnHomePage:
     @pytest.mark.smoke
     def test_catalog_menu_on_home_page_is_present(self):
         cm_store.header_bottom_menu.click_catalog_button()
-        cm_store.catalog_menu \
+        cm_store.home_page_catalog_menu \
             .catalog_menu_is_opened() \
             .hover_smartphones_group_button() \
             .hover_tablets_group_button() \
