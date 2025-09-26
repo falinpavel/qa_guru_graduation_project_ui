@@ -24,8 +24,9 @@ class CartPage:
         return self
 
     @step("Возвращаемся на главную страницу по кнопке 'Вернуться к покупкам'")
-    def return_to_home_page(self) -> None:
+    def return_to_home_page(self) -> 'CartPage':
         s(self.return_to_home_page_button).should(EC.by_and(be.clickable)).click()
+        return self
 
     @step("Проверяем что корзина пуста")
     def check_cart_is_empty(self) -> 'CartPage':

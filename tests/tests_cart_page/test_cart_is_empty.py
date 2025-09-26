@@ -24,4 +24,5 @@ class TestCartIsEmpty:
         cm_store.header_bottom_menu.click_cart_button()
         cm_store.cart_page \
             .is_opened() \
-            .check_cart_is_empty()
+            .check_cart_is_empty() \
+            .return_to_home_page()
