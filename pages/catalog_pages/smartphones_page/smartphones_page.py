@@ -31,3 +31,8 @@ class SmartphonesPage:
     def is_opened(self) -> 'SmartphonesPage':
         s(self.smartphones_page_title).should(EC.by_and(be.visible, have.text("Смартфоны")))
         return self
+
+    @step("Проверяем что бренд отображается в фильтре")
+    def check_manufacturer_is_present(self, manufacturer_name: str) -> 'SmartphonesPage':
+        s(self.manufacturer_filter).should(EC.by_and(be.visible, have.text(manufacturer_name)))
+        return self

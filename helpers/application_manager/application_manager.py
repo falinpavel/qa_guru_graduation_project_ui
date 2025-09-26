@@ -8,12 +8,12 @@ from pages.home_page.home_page import HomePage
 
 class CmStoreApplicationManager:
     def __init__(self):
-        self.header_top_menu: object = HeaderTopMenu()
-        self.header_bottom_menu: object = HeaderBottomMenu()
-        self.auth_modal: object = AuthModal()
-        self.home_page: object = HomePage()
-        self.cart_page: object = CartPage()
-        self.home_page_catalog_menu: object = CatalogMenu()
+        self.header_top_menu = HeaderTopMenu()
+        self.header_bottom_menu = HeaderBottomMenu()
+        self.auth_modal = AuthModal()
+        self.home_page = HomePage()
+        self.cart_page = CartPage()
+        self.home_page_catalog_menu = CatalogMenu()
 
 
 cm_store = CmStoreApplicationManager()
