@@ -34,4 +34,4 @@ class TestAllManufacturerSmartphonesIsPresent:
         cm_store.home_page_catalog_menu.hover_smartphones_group_button(need_click=True)
         cm_store.smartphones_page \
             .is_opened() \
-            .check_manufacturer_is_present(manufacturer_name=expected_manufacturer)
+            .check_that_brand_is_present(brand_name=expected_manufacturer)
