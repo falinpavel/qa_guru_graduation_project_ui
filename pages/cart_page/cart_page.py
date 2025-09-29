@@ -1,6 +1,6 @@
 from selene import browser, be, have, command
 from selene.core.conditions import Condition as EC
-from selene.support.shared.jquery_style import s
+from selene.support.shared.jquery_style import s, ss
 from allure import step
 
 from helpers.links.links import Links
@@ -12,6 +12,7 @@ class CartPage:
         # locators
         self.return_to_home_page_button: str = 'a[class="header-small__back"] span'
         self.cart_is_empty_message_text: str = '.basket-empty__title'
+        self.product_cart_list: str = '.basket__name'
 
     @step("Открываем страницу корзины")
     def open(self) -> 'CartPage':
@@ -32,3 +33,12 @@ class CartPage:
     def check_cart_is_empty(self) -> 'CartPage':
         s(self.cart_is_empty_message_text).should(EC.by_and(be.visible, have.text("Ваша корзина пуста")))
         return self
+
+    @step("Проверяем что товар отображается в корзине")
+    def check_product_is_present(self, product_name: str) -> 'CartPage':
+        all_products = ss(self.product_cart_list)
+        for product in all_products:
+            if product.should(EC.by_and(be.visible, have.text(product_name))):
+                break
+        return self
+

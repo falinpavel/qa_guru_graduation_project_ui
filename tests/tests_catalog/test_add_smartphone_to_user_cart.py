@@ -20,6 +20,11 @@ class TestAddSmartphoneToUserCart:
     @pytest.mark.end_to_end
     @pytest.mark.ui
     def test_add_smartphone_of_brand_apple_iphone_to_user_cart(self):
+        cm_store.header_bottom_menu.click_cart_button()
+        cm_store.cart_page \
+            .is_opened() \
+            .check_cart_is_empty() \
+            .return_to_home_page()
         cm_store.header_bottom_menu.click_catalog_button()
         cm_store.home_page_catalog_menu.hover_smartphones_group_button(need_click=True)
         cm_store.smartphones_page \
@@ -28,3 +33,9 @@ class TestAddSmartphoneToUserCart:
         cm_store.smartphones_page \
             .open_card_smartphone_by(smartphone_name="Apple iPhone 17 Pro Max 256 ГБ тёмно-синий") \
             .click_buy_button_on_one_smartphone_page()
+        cm_store.header_bottom_menu \
+            .click_logo_button() \
+            .click_cart_button()
+        cm_store.cart_page \
+            .is_opened() \
+            .check_product_is_present(product_name="Apple iPhone 17 Pro Max 256 ГБ тёмно-синий")

@@ -25,7 +25,7 @@ class SmartphonesPage:
         self.card_smartphone_by_name: str = '//a[contains(text(),"{smartphone_name}")]'
         self.card_smartphone_price: str = '.catalog-body__price'
         self.card_buy_button: str = '.catalog-body__basket'
-        self.one_smartphone_page_bye_button = '(//span[text()="Добавить в корзину"])[1]'
+        self.one_smartphone_page_bye_button = '.cart-purchase__buy-button'
 
     @step("Открываем страницу 'Смартфоны'")
     def open(self) -> 'SmartphonesPage':
@@ -62,12 +62,12 @@ class SmartphonesPage:
         return self
 
     @step("Открываем карточку определенного товара по его наименованию")
-    def open_card_smartphone_by(self, smartphone_name):
+    def open_card_smartphone_by(self, smartphone_name) -> 'SmartphonesPage':
         s(self.card_smartphone_by_name.format(smartphone_name=smartphone_name)).should(
             EC.by_and(be.clickable, have.text(smartphone_name))).click()
         return self
 
     @step("Кликаем на кнопку 'Добавить в корзину' на странице карточки товара")
-    def click_buy_button_on_one_smartphone_page(self):
-        s(self.one_smartphone_page_bye_button).should(EC.by_and(be.clickable)).perform(command.js.click)
+    def click_buy_button_on_one_smartphone_page(self) -> 'SmartphonesPage':
+        ss(self.one_smartphone_page_bye_button).first.should(EC.by_and(be.present, be.clickable)).hover().click()
         return self
