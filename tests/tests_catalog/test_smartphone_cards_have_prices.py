@@ -23,6 +23,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_apple(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Apple iPhone") \
@@ -35,6 +37,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_samsung(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Samsung") \
@@ -47,6 +51,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_xiaomi(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Xiaomi") \
@@ -59,6 +65,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_google(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Google") \
@@ -71,6 +79,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_honor(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Honor") \
@@ -83,6 +93,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_oneplus(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="OnePlus") \
@@ -95,6 +107,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_nothing(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Nothing") \
@@ -107,6 +121,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_asus(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Asus") \
@@ -119,6 +135,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_nubia(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Nubia") \
@@ -131,6 +149,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_huawei(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Huawei") \
@@ -143,6 +163,8 @@ class TestSmartphoneCardsHavePrices:
         label="UI",
         owner="Falin Pavel (AQA)"
     )
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_check_all_card_prices_brand_motorola(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Motorola") \

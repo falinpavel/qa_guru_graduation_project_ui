@@ -6,7 +6,7 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
 
 @allure_high_level_marks(
     epic="Каталог",
-    feature="Каталог товаров"
+    feature="Каталог смартфонов"
 )
 class TestAllManufacturerSmartphonesIsPresent:
     @allure_mid_level_marks(
@@ -17,7 +17,7 @@ class TestAllManufacturerSmartphonesIsPresent:
         owner="Falin Pavel (AQA)"
     )
     @pytest.mark.usefixtures("full_opening_home_page")
-    @pytest.mark.regression
+    @pytest.mark.smoke
     @pytest.mark.ui
     @pytest.mark.parametrize(
         "expected_manufacturer", [
