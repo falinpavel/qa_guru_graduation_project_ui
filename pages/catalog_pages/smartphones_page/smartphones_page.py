@@ -69,5 +69,5 @@ class SmartphonesPage:
 
     @step("Кликаем на кнопку 'Добавить в корзину' на странице карточки товара")
     def click_buy_button_on_one_smartphone_page(self):
-        s(self.one_smartphone_page_bye_button).should(EC.by_and(be.clickable)).click()
+        s(self.one_smartphone_page_bye_button).should(EC.by_and(be.clickable)).perform(command.js.click)
         return self
