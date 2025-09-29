@@ -23,6 +23,7 @@ class SmartphonesPage:
         self.brand_one_smartphone_by_name: str = '//div/a[text()="{brand_name}"]'
         self.card_list_of_smartphones: str = '//div[@class="catalog-body__inner"]'
         self.card_smartphone_price: str = '.catalog-body__price'
+        self.card_buy_button: str = '.catalog-body__basket'
 
     @step("Открываем страницу 'Смартфоны'")
     def open(self) -> 'SmartphonesPage':
@@ -45,9 +46,15 @@ class SmartphonesPage:
             EC.by_and(be.clickable, have.text(brand_name))).click()
         return self
 
+    @step("Кликаем на кнопку 'В корзину'")
+    def click_buy_button(self) -> 'SmartphonesPage':
+        s(self.card_buy_button).with_(timeout=browser.config.timeout * 2).should(EC.by_and(be.clickable, have.text("В корзину"))).click()
+        return self
+
     @step("Проверяем что все товары имеют цену и она не равна нулю")
-    def check_prices_all_smartphones(self) -> 'SmartphonesPage':
+    def check_prices_all_smartphone_cards(self) -> 'SmartphonesPage':
         for smartphone in ss(self.card_list_of_smartphones):
             smartphone.perform(command.js.scroll_into_view).s(self.card_smartphone_price).should(
-                EC.by_and(be.visible, be.not_.blank))
+                EC.by_and(be.visible, be.not_.blank)
+            )
         return self

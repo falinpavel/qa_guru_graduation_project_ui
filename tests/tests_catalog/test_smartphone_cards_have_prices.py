@@ -15,135 +15,135 @@ def open_smartphones_page(full_opening_home_page):
     epic="Каталог",
     feature="Корзина пользователя"
 )
-class TestAddSmartphonesToCart:
+class TestSmartphoneCardsHavePrices:
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="8",
-        title="Пользователь добавляет сматрфоны марки Apple iPhone в корзину",
+        title="Пользователь видит цены на смартфоны марки Apple iPhone",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_apple_to_cart(self):
+    def test_check_all_card_prices_brand_apple(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Apple iPhone") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="10",
-        title="Пользователь добавляет сматрфоны марки Samsung в корзину",
+        title="Пользователь видит цены на смартфоны марки Samsung",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_samsung_to_cart(self):
+    def test_check_all_card_prices_brand_samsung(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Samsung") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="11",
-        title="Пользователь добавляет сматрфоны марки Xiaomi в корзину",
+        title="Пользователь видит цены на смартфоны марки Xiaomi",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_xiaomi_to_cart(self):
+    def test_check_all_card_prices_brand_xiaomi(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Xiaomi") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="12",
-        title="Пользователь добавляет сматрфоны марки Google в корзину",
+        title="Пользователь видит цены на смартфоны марки Google",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_google_to_cart(self):
+    def test_check_all_card_prices_brand_google(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Google") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="13",
-        title="Пользователь добавляет сматрфоны марки Honor в корзину",
+        title="Пользователь видит цены на смартфоны марки Honor",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_honor_to_cart(self):
+    def test_check_all_card_prices_brand_honor(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Honor") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="14",
-        title="Пользователь добавляет сматрфоны марки OnePlus в корзину",
+        title="Пользователь видит цены на смартфоны марки OnePlus",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_oneplus_to_cart(self):
+    def test_check_all_card_prices_brand_oneplus(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="OnePlus") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="15",
-        title="Пользователь добавляет сматрфоны марки Nothing в корзину",
+        title="Пользователь видит цены на смартфоны марки Nothing",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_nothing_to_cart(self):
+    def test_check_all_card_prices_brand_nothing(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Nothing") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="16",
-        title="Пользователь добавляет сматрфоны марки Asus в корзину",
+        title="Пользователь видит цены на смартфоны марки Asus",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_asus_to_cart(self):
+    def test_check_all_card_prices_brand_asus(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Asus") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="17",
-        title="Пользователь добавляет сматрфоны марки Nubia в корзину",
+        title="Пользователь видит цены на смартфоны марки Nubia",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_nubia_to_cart(self):
+    def test_check_all_card_prices_brand_nubia(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Nubia") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="18",
-        title="Пользователь добавляет сматрфоны марки Huawei в корзину",
+        title="Пользователь видит цены на смартфоны марки Huawei",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_huawei_to_cart(self):
+    def test_check_all_card_prices_brand_huawei(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Huawei") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
 
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="19",
-        title="Пользователь добавляет сматрфоны марки Motorola в корзину",
+        title="Пользователь видит цены на смартфоны марки Motorola",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    def test_add_smartphones_by_motorola_to_cart(self):
+    def test_check_all_card_prices_brand_motorola(self):
         cm_store.smartphones_page \
             .click_brand_by(brand_name="Motorola") \
-            .check_prices_all_smartphones()
+            .check_prices_all_smartphone_cards()
