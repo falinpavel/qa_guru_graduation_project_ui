@@ -25,7 +25,7 @@ class SmartphonesPage:
         self.card_smartphone_by_name: str = '//a[contains(text(),"{smartphone_name}")]'
         self.card_smartphone_price: str = '.catalog-body__price'
         self.card_buy_button: str = '.catalog-body__basket'
-        self.one_smartphone_page_bye_button = ''  #TODO!
+        self.one_smartphone_page_bye_button = '(//span[text()="Добавить в корзину"])[1]'
 
     @step("Открываем страницу 'Смартфоны'")
     def open(self) -> 'SmartphonesPage':
