@@ -22,7 +22,7 @@ class SmartphonesPage:
         self.brand_filter: str = '.receipts-block'
         self.brand_one_smartphone_by_name: str = '//div/a[text()="{brand_name}"]'
         self.card_list_of_smartphones: str = '//div[@class="catalog-body__inner"]'
-        self.card_smartphone_by_name: str = '//a[contains(text(),"{smartphone_name}")]'
+        self.card_smartphone_by_name: str = "//a[contains(text(),'{smartphone_name}')]"
         self.card_smartphone_price: str = '.catalog-body__price'
         self.card_buy_button: str = '.catalog-body__basket'
         self.one_smartphone_page_bye_button = '.cart-purchase__buy-button'
@@ -63,8 +63,8 @@ class SmartphonesPage:
 
     @step("Открываем карточку определенного товара по его наименованию")
     def open_card_smartphone_by(self, smartphone_name) -> 'SmartphonesPage':
-        s(self.card_smartphone_by_name.format(smartphone_name=smartphone_name)).should(
-            EC.by_and(be.clickable, have.text(smartphone_name))).click()
+        s(self.card_smartphone_by_name.format(smartphone_name=smartphone_name)).perform(
+            command.js.scroll_into_view).should(EC.by_and(be.clickable, have.text(smartphone_name))).click()
         return self
 
     @step("Кликаем на кнопку 'Добавить в корзину' на странице карточки товара")

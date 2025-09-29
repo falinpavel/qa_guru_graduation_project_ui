@@ -19,7 +19,21 @@ class TestAddSmartphoneToUserCart:
     @pytest.mark.usefixtures("full_opening_home_page")
     @pytest.mark.end_to_end
     @pytest.mark.ui
-    def test_add_smartphone_of_brand_apple_iphone_to_user_cart(self):
+    @pytest.mark.parametrize(
+        "expected_smartphone_name", [
+            "Apple iPhone 17 Pro Max 256 ГБ тёмно-синий",
+            'Apple iPhone 16 Pro Max 256 ГБ "чёрный титан"',
+            'Apple iPhone 16 Pro Max 256 ГБ "пустынный титан"',
+            'Apple iPhone 15 128 ГБ чёрный'
+        ],
+        ids=[
+            "Apple iPhone 17 Pro Max 256 ГБ dark blue",
+            'Apple iPhone 16 Pro Max 256 ГБ black titanium',
+            'Apple iPhone 16 Pro Max 256 ГБ eagle titanium',
+            'Apple iPhone 15 128 ГБ black'
+        ]
+    )
+    def test_add_smartphone_of_brand_apple_iphone_to_user_cart(self, expected_smartphone_name):
         cm_store.header_bottom_menu.click_cart_button()
         cm_store.cart_page \
             .is_opened() \
@@ -31,11 +45,11 @@ class TestAddSmartphoneToUserCart:
             .is_opened() \
             .click_brand_by(brand_name="Apple iPhone")
         cm_store.smartphones_page \
-            .open_card_smartphone_by(smartphone_name="Apple iPhone 17 Pro Max 256 ГБ тёмно-синий") \
+            .open_card_smartphone_by(smartphone_name=expected_smartphone_name) \
             .click_buy_button_on_one_smartphone_page()
         cm_store.header_bottom_menu \
             .click_logo_button() \
             .click_cart_button()
         cm_store.cart_page \
             .is_opened() \
-            .check_product_is_present(product_name="Apple iPhone 17 Pro Max 256 ГБ тёмно-синий")
+            .check_product_is_present(product_name=expected_smartphone_name)
