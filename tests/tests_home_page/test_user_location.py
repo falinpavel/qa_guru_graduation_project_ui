@@ -10,18 +10,19 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
 )
 class TestUserLocation:
     @allure_mid_level_marks(
-        story="Москва является предопределенной локацией пользователя и выставляется по умолчанию",
+        story="Пользователь соглашается на предвыбранную локацию",
         testcase_id="3",
-        title="Пользователю по умолчанию присваивается локация Москва",
+        title="""При определении геолокации пользователя появляется
+         модальное окно с возможностью согласиться или выбрать другую локацию""",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
-    @pytest.mark.usefixtures("full_opening_home_page")
     @pytest.mark.smoke
     @pytest.mark.ui
-    def test_default_user_location_is_moscow(self):
+    def test_user_accept_choosed_location(self):
+        cm_store.home_page.open().is_opened().accept_cookie()
         cm_store.home_page \
-            .check_location_name()
+            .click_accept_location()
 
     @allure_mid_level_marks(
         story="Пользователь может изменить предопределенную локацию",
@@ -42,7 +43,6 @@ class TestUserLocation:
     @pytest.mark.regression
     @pytest.mark.ui
     def test_user_can_change_new_location_from_present_list(self, new_location):
-        cm_store.home_page.check_location_name()
         cm_store.header_top_menu.click_location_button()
         cm_store.home_page.change_location_from_present_list(location_name=new_location)
         cm_store.home_page.check_location_name(location_name=new_location)

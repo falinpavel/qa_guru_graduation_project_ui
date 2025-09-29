@@ -23,6 +23,8 @@ class HomePage:
         self.location_name_button: str = '.header-city__link'
         self.modal_location_name_button: str \
             = '//div[@class="city-search__content"]//a[contains(text(), "{location_name}")]'
+        self.accept_modal_location_button: str = '//a[contains (text(), "верно")]'
+        self.cancel_modal_location_button: str = '//a[contains (text(), "другой")]'
 
     @step("Открываем главную страницу")
     def open(self) -> 'HomePage':
@@ -39,10 +41,23 @@ class HomePage:
         s(self.close_location_button).should(EC.by_and(be.clickable)).click()
         return self
 
-    @step("Проверяем наименование локации (по умолчанию Москва)")
-    def check_location_name(self, location_name: str = "Москва") -> 'HomePage':
+    @step("Проверяем наименование локации")
+    def check_location_name(self, location_name: str) -> 'HomePage':
         s(self.location_name_button).should(EC.by_and(be.visible, have.text(location_name)))
         return self
+
+    @step("Соглашаемся на выбранную локацию нажав на кнопку 'Да, верно' в модальном окне")
+    def click_accept_location(self) -> 'HomePage':
+        s(self.accept_modal_location_button).should(
+            EC.by_and(be.clickable, have.text("Да, верно"))).click()
+        return self
+
+    @step("В открытом модальном окне нажимаем на кнопку 'Выбрать другой' для открытия списка локаций")
+    def click_choose_another_location(self) -> 'HomePage':
+        s(self.cancel_modal_location_button).should(
+            EC.by_and(be.clickable, have.text("Выбрать другой"))).click()
+        return self
+
 
     @step("Открываем модальное окно и выбираем новую локацию из списка")
     def change_location_from_present_list(self, location_name: str) -> 'HomePage':
