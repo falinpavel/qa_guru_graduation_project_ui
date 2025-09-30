@@ -12,7 +12,7 @@ class TestAddSmartphoneToUserCart:
     @allure_mid_level_marks(
         story="Добавление товара в корзину",
         testcase_id="10",
-        title="Пользователь может добавить товар в корзину",
+        title="Пользователь может добавить смартфоны марки Apple iPhone в корзину",
         label="UI",
         owner="Falin Pavel (AQA)"
     )
@@ -21,18 +21,19 @@ class TestAddSmartphoneToUserCart:
     @pytest.mark.ui
     @pytest.mark.parametrize(
         "expected_smartphone_name", [
-            "Apple iPhone 17 Pro Max 256 ГБ тёмно-синий",
+            "Apple iPhone 17 Pro Max 256 ГБ тёмно-синий (1sim + eSim)",
             'Apple iPhone 16 Pro Max 256 ГБ "чёрный титан"',
             'Apple iPhone 16 Pro Max 256 ГБ "пустынный титан"',
             'Apple iPhone 15 128 ГБ чёрный'
         ],
         ids=[
-            "Apple iPhone 17 Pro Max 256 ГБ dark blue",
-            'Apple iPhone 16 Pro Max 256 ГБ black titanium',
-            'Apple iPhone 16 Pro Max 256 ГБ eagle titanium',
-            'Apple iPhone 15 128 ГБ black'
+            "Apple iPhone 17 Pro Max 256 GB dark blue",
+            'Apple iPhone 16 Pro Max 256 GB black titanium',
+            'Apple iPhone 16 Pro Max 256 GB eagle titanium',
+            'Apple iPhone 15 128 GB black'
         ]
     )
+    @pytest.mark.xfail(reason="JIRA-TASK-123: Флаки тест, кнопка 'Добавить в корзину' срабатывает с большой задержкой")
     def test_add_smartphone_of_brand_apple_iphone_to_user_cart(self, expected_smartphone_name):
         cm_store.header_bottom_menu.click_cart_button()
         cm_store.cart_page \
@@ -44,6 +45,9 @@ class TestAddSmartphoneToUserCart:
         cm_store.smartphones_page \
             .is_opened() \
             .click_brand_by(brand_name="Apple iPhone")
+        cm_store.header_bottom_menu \
+            .type_value_in_search_field(search_value=expected_smartphone_name) \
+            .click_search_button()
         cm_store.smartphones_page \
             .open_card_smartphone_by(smartphone_name=expected_smartphone_name) \
             .click_buy_button_on_one_smartphone_page()

@@ -32,7 +32,7 @@ class HeaderBottomMenu:
         return self
 
     @step("Нажимаем на поле ввода поиска по каталогу и вводим свое значение")
-    def input_search_field(self, search_value: str) -> 'HeaderBottomMenu':
+    def type_value_in_search_field(self, search_value: str) -> 'HeaderBottomMenu':
         s(self.input_search_field).should(EC.by_and(be.clickable)).click().type(search_value)
         return self
 
