@@ -61,7 +61,8 @@ class HomePage:
 
     @step("Открываем модальное окно и выбираем новую локацию из списка")
     def change_location_from_present_list(self, location_name: str) -> 'HomePage':
-        s(self.modal_location_name_button.format(location_name=location_name)).should(EC.by_and(be.clickable)).click()
+        s(self.modal_location_name_button.format(location_name=location_name)).should(
+            EC.by_and(be.clickable)).click().with_(timeout=browser.config.timeout * 2)
         return self
 
     @step("Закрываем виджет 'Напишите нам...'")
