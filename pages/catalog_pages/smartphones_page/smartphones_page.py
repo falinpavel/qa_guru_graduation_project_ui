@@ -44,7 +44,8 @@ class SmartphonesPage:
 
     @step("Проверяем что бренд отображается в фильтре")
     def check_that_brand_is_present(self, brand_name: str) -> 'SmartphonesPage':
-        s(self.brand_filter).should(EC.by_and(be.visible, have.text(brand_name)))
+        s(self.brand_one_smartphone_by_name.format(brand_name=brand_name)).should(
+            EC.by_and(be.visible, have.text(brand_name)))
         return self
 
     @step("Кликаем на наименование бренда")
