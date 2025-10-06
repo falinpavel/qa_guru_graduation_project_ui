@@ -11,7 +11,7 @@ class HomePage:
         self.home_page_url: str = Links().base_page_url
         # locators
         self.close_widget_button: str = '.closeIcon__TO5Xx'
-        self.accept_cookie_button: str = '//div[@class="cookie-notice"]//button[@class="button"]'
+        self.accept_cookie_button: str = '.cookie-notice__content > .button'
         self.slider: str = '.home-hero__slider'
         self.slider_swipe_left_button: str = '.home-hero__nav_prev'
         self.slider_swipe_right_button: str = '.home-hero__nav_next'
@@ -71,7 +71,7 @@ class HomePage:
 
     @step("Принимаем cookies")
     def accept_cookie(self) -> 'HomePage':
-        s(self.accept_cookie_button).should(EC.by_and(be.clickable)).with_(timeout=browser.config.timeout * 2).click()
+        s(self.accept_cookie_button).with_(timeout=browser.config.timeout * 2).double_click()
         return self
 
     @step("Проверяем что плашка cookies исчезла")
