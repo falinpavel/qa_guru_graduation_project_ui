@@ -11,7 +11,7 @@ class HomePage:
         self.home_page_url: str = Links().base_page_url
         # locators
         self.close_widget_button: str = '.closeIcon__TO5Xx'
-        self.accept_cookie_button: str = '.cookie-notice__content > .button'
+        self.accept_cookie_button: str = '//div[@class="cookie-notice"]//button[@class="button"]'
         self.slider: str = '.home-hero__slider'
         self.slider_swipe_left_button: str = '.home-hero__nav_prev'
         self.slider_swipe_right_button: str = '.home-hero__nav_next'
@@ -57,7 +57,6 @@ class HomePage:
         s(self.cancel_modal_location_button).should(
             EC.by_and(be.clickable, have.text("Выбрать другой"))).click()
         return self
-
 
     @step("Открываем модальное окно и выбираем новую локацию из списка")
     def change_location_from_present_list(self, location_name: str) -> 'HomePage':
