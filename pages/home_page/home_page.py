@@ -71,7 +71,7 @@ class HomePage:
 
     @step("Принимаем cookies")
     def accept_cookie(self) -> 'HomePage':
-        s(self.accept_cookie_button).should(EC.by_and(be.clickable)).click()
+        s(self.accept_cookie_button).should(EC.by_and(be.clickable)).with_(timeout=browser.config.timeout * 2).click()
         return self
 
     @step("Проверяем что плашка cookies исчезла")
