@@ -24,16 +24,17 @@ class TestAddSmartphoneToUserCart:
             "Apple iPhone 17 Pro Max 256 ГБ тёмно-синий (1sim + eSim)",
             'Apple iPhone 16 Pro Max 256 ГБ "чёрный титан"',
             'Apple iPhone 16 Pro Max 256 ГБ "пустынный титан"',
-            'Apple iPhone 15 128 ГБ чёрный'
+            'Apple iPhone 15 128 ГБ чёрный',
+            'Apple iPhone 17 256 ГБ зелёный'
         ],
         ids=[
             "Apple iPhone 17 Pro Max 256 GB dark blue",
             'Apple iPhone 16 Pro Max 256 GB black titanium',
             'Apple iPhone 16 Pro Max 256 GB eagle titanium',
-            'Apple iPhone 15 128 GB black'
+            'Apple iPhone 15 128 GB black',
+            'Apple iPhone 17 256 GB green'
         ]
     )
-    @pytest.mark.xfail(reason="JIRA-TASK-123: Флаки тест, кнопка 'Добавить в корзину' срабатывает с большой задержкой")
     def test_add_smartphone_of_brand_apple_iphone_to_user_cart(self, expected_smartphone_name):
         cm_store.header_bottom_menu.click_cart_button()
         cm_store.cart_page \

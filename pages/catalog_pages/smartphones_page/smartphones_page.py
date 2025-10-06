@@ -25,7 +25,8 @@ class SmartphonesPage:
         self.card_smartphone_by_name: str = "//a[contains(text(),'{smartphone_name}')]"
         self.card_smartphone_price: str = '.catalog-body__price'
         self.card_buy_button: str = '.catalog-body__basket'
-        self.one_smartphone_page_bye_button = '(//a[@data-no="Добавить в корзину"])[1]'
+        self.one_smartphone_page_bye_button =  \
+            '//div[@class="cart-purchase"]//div//a[contains(@class,"cart-purchase__buy-button button button__full catalog-body__basket")]' # TODO!!!
         self.one_smartphone_page_go_to_cart_button = '(//a[@data-ok="Перейти в корзину"])[1]'
         self.characteristics_of_smartphone: str = '(//li[@data-id="characteristics"])[1]'
         self.characteristics_of_smartphone_value: str = "(//h3[text()='ОБЩИЕ ХАРАКТЕРИСТИКИ'])[1]"
