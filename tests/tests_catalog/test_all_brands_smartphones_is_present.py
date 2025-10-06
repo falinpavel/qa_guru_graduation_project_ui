@@ -8,7 +8,7 @@ from utils.allure.allure_custom_labels import allure_high_level_marks, allure_mi
     epic="Каталог",
     feature="Каталог смартфонов"
 )
-class TestAllManufacturerSmartphonesIsPresent:
+class TestAllBrandsSmartphonesIsPresent:
     @allure_mid_level_marks(
         story="Все бренды смартфонов должны быть представлены на странице",
         testcase_id="9",
@@ -20,7 +20,7 @@ class TestAllManufacturerSmartphonesIsPresent:
     @pytest.mark.smoke
     @pytest.mark.ui
     @pytest.mark.parametrize(
-        "expected_manufacturer", [
+        "expected_brand", [
             'Apple iPhone', 'Samsung',
             'Xiaomi', 'Google',
             'Honor', 'OnePlus',
@@ -29,9 +29,9 @@ class TestAllManufacturerSmartphonesIsPresent:
             'Huawei', 'Motorola',
         ]
     )
-    def test_all_manufacturer_smartphones_is_present(self, expected_manufacturer):
+    def test_all_brands_smartphones_is_present(self, expected_brand):
         cm_store.header_bottom_menu.click_catalog_button()
         cm_store.home_page_catalog_menu.hover_smartphones_group_button(need_click=True)
         cm_store.smartphones_page \
             .is_opened() \
-            .check_that_brand_is_present(brand_name=expected_manufacturer)
+            .check_that_brand_is_present(brand_name=expected_brand)
