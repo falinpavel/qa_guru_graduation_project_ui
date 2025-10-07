@@ -1,0 +1,83 @@
+name: API tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      LOGIN_SELENOID: ${{ secrets.LOGIN_SELENOID }}
+      PASSWORD_SELENOID: ${{ secrets.PASSWORD_SELENOID }}
+      PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry config virtualenvs.create false
+          poetry install --no-interaction --no-ansi --no-root
+
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=${BASE_URL}" > .env
+          echo "LOGIN_SELENOID=${LOGIN_SELENOID}" >> .env
+          echo "PASSWORD_SELENOID=${PASSWORD_SELENOID}" >> .env
+          echo "PHONE_NUMBER=${PHONE_NUMBER}" >> .env
+
+      - name: Run UI tests with pytest and generate Allure results
+        run: |
+          poetry run pytest --context=chrome_selenoid
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+  publish-report:
+    if: always()
+    needs: [run-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Download Allure results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
