@@ -1,4 +1,4 @@
-name: API tests
+name: UI (Selene + Selenoid) tests
 
 on:
   push:
