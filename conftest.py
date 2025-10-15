@@ -182,8 +182,9 @@ def browser_settings(context) -> browser:
                     f"https://{os.getenv('LOGIN_SELENOID')}:"
                     f"{os.getenv('PASSWORD_SELENOID')}@"
                     f"selenoid.autotests.cloud/wd/hub"
+                    # 0.0.0.0:4444/wd/hub - local selenoid (run docker container)
                 ),
-                options=options
+                options=options,
             )
             browser.config.driver = driver
         else:
