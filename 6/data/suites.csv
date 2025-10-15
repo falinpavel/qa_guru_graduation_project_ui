@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","43726","Пользователь может добавить смартфоны марки Apple iPhone в корзину","tests.tests_catalog","Wed Oct 15 13:25:11 GMT 2025","passed","Wed Oct 15 13:25:54 GMT 2025","TestAddSmartphoneToUserCart","test_add_smartphone_to_user_cart","",""
+"","41178","Пользователь может добавить смартфоны марки Apple iPhone в корзину","tests.tests_catalog","Wed Oct 15 13:26:14 GMT 2025","passed","Wed Oct 15 13:26:55 GMT 2025","TestAddSmartphoneToUserCart","test_add_smartphone_to_user_cart","",""
+"","3089","Проверяем что пользователь может авторизоваться по номеру телефона","tests.tests_authorization","Wed Oct 15 13:24:22 GMT 2025","passed","Wed Oct 15 13:24:25 GMT 2025","TestUserCanAuthWithPhoneNumber","test_user_auth_with_phone_number","",""
+"","10477","Проверяем что корзина пуста","tests.tests_cart_page","Wed Oct 15 13:24:43 GMT 2025","passed","Wed Oct 15 13:24:53 GMT 2025","TestCartIsEmpty","test_cart_is_empty","",""
