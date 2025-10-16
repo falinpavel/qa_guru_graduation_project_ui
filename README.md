@@ -21,6 +21,11 @@
   <code><img width="6%" title="Jira" src=".github/github_readme/images/logo/jira-original.svg" alt="jira"></code>
 </p>
 
+## <img width="3%" title="pycharm" src=".github/github_readme/images/logo/selenoid.png"> Ведео прохождения теста:
+<p align="center">
+<img title="selenoid launch example" src=".github/github_readme/video/ui_test_video_example.gif">
+</p>
+
 ## <img width="3%" title="pycharm" src=".github/github_readme/images/logo/pycharm.png"> Для локального запуска тестов:
 
 1) Клонировать репозиторий: git clone git@github.com:falinpavel/qa_guru_graduation_project_ui.git
