@@ -23,7 +23,7 @@
 
 ## <img width="3%" title="pycharm" src=".github/github_readme/images/logo/pycharm.png"> Для локального запуска тестов:
 
-1) Клонировать репозиторий: git clone git@github.com:falinpavel/qa_guru_graduation_project_rest_api.git
+1) Клонировать репозиторий: git clone git@github.com:falinpavel/qa_guru_graduation_project_ui.git
 2) Установить зависимости (в проекте используется poetry): poetry init -> poetry install -> poetry env activate
 3) Запуск всех тестов с генерацией отчетов Allure использовать команду: pytest (все параметры запуска зашиты в pyproject.toml)
 4) Просмотр отчета Allure (если установлен Allure CLI): allure serve reports/allure-results
